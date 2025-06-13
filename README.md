@@ -108,7 +108,59 @@ The GitHub Actions workflow in `.github/workflows/ci-cd.yml` demonstrates a comp
 
 1. **Test Stage**: Runs all tests and uploads coverage reports
 2. **Build Stage**: Compiles the TypeScript code and prepares the application
-3. **Docker Stage**: Builds a Docker image for deployment
+3. **Deploy Stage**: Builds and pushes Docker image to Google Cloud Platform, then deploys to Cloud Run
+
+## Deploying to Google Cloud Platform
+
+This project is configured to automatically deploy to Google Cloud Platform's Cloud Run service when changes are pushed to the main branch.
+
+### Prerequisites for GCP Deployment
+
+1. A Google Cloud Platform account with an active project
+2. The following APIs enabled in your GCP project:
+   - Cloud Run API
+   - Artifact Registry API
+   - Cloud Build API
+
+3. A service account with the following roles:
+   - Cloud Run Admin
+   - Storage Admin
+   - Artifact Registry Writer
+
+### Setting Up GCP Deployment
+
+1. **Create an Artifact Registry Repository**:
+   ```bash
+   gcloud artifacts repositories create cicd-demo \
+     --repository-format=docker \
+     --location=[YOUR_REGION] \
+     --description="CICD Demo Docker repository"
+   ```
+
+2. **Configure GitHub Secrets**:
+   Add the following secrets to your GitHub repository:
+   - `GCP_PROJECT_ID`: Your GCP project ID
+   - `GCP_SA_KEY`: The entire content of the service account JSON key file
+   - `GCP_REGION`: Your preferred GCP region (e.g., `us-central1`)
+
+3. **Deployment Process**:
+   - When code is pushed to the main branch, GitHub Actions will:
+     - Run tests
+     - Build the application
+     - Build and push a Docker image to GCP Artifact Registry
+     - Deploy the image to Cloud Run
+
+4. **Accessing the Deployed Application**:
+   - The application will be available at the URL provided by Cloud Run
+   - The URL can be found in the GitHub Actions workflow output
+
+### Benefits of Cloud Run Deployment
+
+- Serverless container execution
+- Automatic scaling based on traffic
+- Pay only for resources used during request handling
+- Built-in HTTPS endpoints
+- Easy rollback to previous versions
 
 ## Teaching Tips
 
@@ -134,8 +186,6 @@ The GitHub Actions workflow in `.github/workflows/ci-cd.yml` demonstrates a comp
 - `npm start` - Run the built application
 - `npm run docker:build` - Build the Docker image
 - `npm run docker:run` - Run the Docker container
-
-
 
 ## License
 
