@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Demo Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CI/CD Demo Calculator</h1>
+            <div class="version-badge" id="version-badge">v1.0.0</div>
+            <div class="environment-badge" id="environment-badge">development</div>
+        </header>
+        
+        <div class="deployment-info">
+            <h2>Deployment Information</h2>
+            <p>This application demonstrates a simple CI/CD pipeline with automated testing and deployment.</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Version:</span>
+                    <span id="version">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Environment:</span>
+                    <span id="environment">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Last Deployed:</span>
+                    <span id="timestamp">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator">
+            <h2>Calculator Demo</h2>
+            <div class="calculator-inputs">
+                <input type="number" id="num1" placeholder="First number">
+                <select id="operation">
+                    <option value="add">+</option>
+                    <option value="subtract">-</option>
+                    <option value="divide">÷</option>
+                </select>
+                <input type="number" id="num2" placeholder="Second number">
+                <button id="calculate-btn">Calculate</button>
+            </div>
+            <div class="result">
+                <h3>Result: <span id="result">--</span></h3>
+            </div>
+        </div>
+
+        <div class="ci-cd-info">
+            <h2>About CI/CD</h2>
+            <p>This application demonstrates the following CI/CD concepts:</p>
+            <ul>
+                <li><strong>Continuous Integration:</strong> Automated testing with Jest</li>
+                <li><strong>Continuous Deployment:</strong> Automated Docker builds and deployments</li>
+                <li><strong>Version Control:</strong> Tracking changes and deployments</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>CI/CD Teaching Demo - Created for educational purposes</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
