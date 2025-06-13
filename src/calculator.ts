@@ -33,9 +33,9 @@ export class Calculator {
 
   divide(a: number, b: number): string | number { 
     // Check if division feature is enabled
-    if (!featureFlags.enableDivision) {
+   if (!featureFlags.enableDivision) {
       return 'Division feature is disabled';
-    }
+   }
     
     // Validate input
     if (!this.validateInput(a, b)) {
@@ -50,7 +50,3 @@ export class Calculator {
     return a / b;
   }
 }
-
-// Example usage
-// const calculator = new Calculator();
-// console.log(calculator.divide(5, 0));
