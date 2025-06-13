@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import { Calculator } from './calculator';
+import { featureFlags } from './feature-flags';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -43,9 +44,18 @@ app.get('/api/version', (req: Request, res: Response) => {
   });
 });
 
+// Feature flags endpoint to check enabled features
+app.get('/api/features', (req: Request, res: Response) => {
+  res.json({
+    features: featureFlags,
+    message: 'Current feature flag configuration'
+  });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
+  console.log(`Feature flags: ${JSON.stringify(featureFlags)}`);
 });
 
 // Export for testing purposes
